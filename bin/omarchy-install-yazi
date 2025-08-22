@@ -2,14 +2,14 @@
 
 # Configure Yazi file manager with plugins and custom settings
 if command -v yazi &>/dev/null; then
-    mkdir -p ~/.config/yazi
+  mkdir -p ~/.config/yazi
 
-    # Install Yazi plugins ya pkg add yazi-rs/plugins:full-border
-    ya pkg add AnirudhG07/plugins-yazi:copy-file-contents
-    ya pkg add yazi-rs/plugins:full-border
+  # Install Yazi plugins ya pkg add yazi-rs/plugins:full-border
+  ya pkg add AnirudhG07/plugins-yazi:copy-file-contents
+  ya pkg add yazi-rs/plugins:full-border
 
-    # Create init.lua configuration
-    cat >~/.config/yazi/init.lua <<'EOF'
+  # Create init.lua configuration
+  cat >~/.config/yazi/init.lua <<'EOF'
   -- Show symlink in status bar
   Status:children_add(function(self)
   local h = self._current.hovered
@@ -46,15 +46,16 @@ require("full-border"):setup({
 })
 EOF
 
-    # Create keymap.toml configuration
-    cat >~/.config/yazi/keymap.toml <<'EOF'
+  # Create keymap.toml configuration
+  cat >~/.config/yazi/keymap.toml <<'EOF'
   [mgr]
   prepend_keymap = [
     { on = [ "<A-y>" ], run = "plugin copy-file-contents", desc = "Copy file contents" },
+    { on = [ "<C-n>" ], run = 'shell -- dragon-drop -x -i -T "$1"', desc = "Drag'n'drop selected files" },
     ]
 EOF
 
-    echo "Yazi has been configured with plugins and custom settings"
+  echo "Yazi has been configured with plugins and custom settings"
 else
-    echo "Yazi is not installed. Please install yazi first."
+  echo "Yazi is not installed. Please install yazi first."
 fi
